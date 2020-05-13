@@ -1,0 +1,139 @@
+"""
+You wake up in a Room, with nothing on you, There is a window, covered in bars,
+A pile of clothes lies near you.
+You are strapped in a bed.
+"""
+out_of_bed = False
+have_clothes = False
+location = "Locked Room"
+knife = False
+key = False
+
+
+print("You wake up in a room, strapped to the bed")
+while location != "Escaped":
+  if location == "Locked Room":
+    if out_of_bed == True:
+      print("You can move around now!")
+    else:
+      print("You can not move because you are stuck in the bed.")
+    print("There is a closet near by")
+    print("There is a dresser on your left")
+    print("There is a door in front of you")
+    print("There is a pile of clothes on the ground")
+    print("There is a window to your right")
+
+    print()
+    print("[1] Go to the door")
+    print("[2] Head to the dresser")
+    print("[3] Go to the pile of clothes")
+    print("[4] Walk to the closet")
+    print("[5] Move to the Window")
+    choice = int(input("Choice: "))
+
+    print()
+
+    if choice == 1:
+      if out_of_bed is False:
+        print("You can not move because you are stuck in bed")
+      else:
+        location = "locked door"
+    elif choice == 2:
+      if out_of_bed is False:
+        location = "look dresser"
+        print("You can not move because you are stuck in bed but you can see a knife on the dresser")
+        print("[1] Reach for the knife.")
+        print("[2] Do something else")
+        choice = int(input("Choice: "))
+        if choice == 1:
+          print("You reach for the knife and cut yourself free.")
+          out_of_bed = True
+          knife = True
+          location = "Locked Room"
+        elif choice == 2:
+          location = "Locked Room"
+      else:
+        location = "dresser"
+    elif choice == 3:
+      if out_of_bed is False:
+        print("You can not move because you are stuck in bed")
+      else:
+        location = "pile of clothes"
+    elif choice == 4:
+      if out_of_bed is False:
+        print("You can not move because you are stuck in bed")
+      else:
+        location = "closet"
+    elif choice == 5:
+      if out_of_bed is False:
+        print("You can not move because you are stuck in bed")
+      else:
+        location = "Window"
+  if location == "locked door":
+    print("The door stands in front of you")
+    print()
+    print("[1] Open the door")
+    print("[2] Go Back")
+    if key is True:
+      print("[3] Unlock the door with the key")
+    choice = int(input("Choice: "))
+    if choice == 1:
+      print("The Door is locked, you have to find the key first.")
+    if choice == 2:
+      location = "Locked Room"
+    if choice == 3 and key is True and have_clothes is True:
+      print("You unlock the door to a blast of cold air, luckily you are warm and protected, You escaped!")
+      location = "Escaped"
+    if choice == 3 and key is True and have_clothes is False:
+      print("You unlock the door and a blast of cold air blows through the door, You can't go outside with your clothes.")
+  if location == "dresser":
+    print("It's a wooden dresser, with one drawer slightly open")
+    print()
+    print("[1] Open the drawer")
+    print("[2] Go back")
+    choice = int(input("Choice: "))
+    if choice == 1:
+      print("You open the drawer and carved out on the bottom are the numbers 42069")
+    if choice == 2:
+      location = "Locked Room"
+  if location == "pile of clothes":
+    print("There is a pile of clothes on the floor")
+    print()
+    print("[1] Pick up the clothes")
+    print("[2] Go back")
+    choice = int(input("Choice: "))
+    if choice == 1 and have_clothes is False:
+      print("You pick up the clothes and put them on.")
+      have_clothes = True
+    elif choice == 1 and have_clothes is True:
+      print("You already picked up the clothes.")
+    if choice == 2:
+      location = "Locked Room"
+  if location == "closet":
+    print("There is a combination lock on the closet doors")
+    print()
+    print("[1] Try to unlock the lock")
+    print("[2] Go back")
+    choice = int(input("Choice: "))
+    if choice == 1:
+      combo = int(input("Enter Combination: "))
+      if combo == 42069:
+        print("The lock opens and you open the door, you find a key inside. After taking the key, you lock the closet again")
+        key = True
+      else:
+        print("The lock does not open, it seems you put in the wrong combination")
+    if choice == 2:
+      location = "Locked Room"
+  if location == "Window":
+    print("There is a window with iron bars around it, keeping you in.")
+    print()
+    print("[1] Look outside")
+    print("[2] Go back")
+    choice = int(input("Choice: "))
+    if choice == 1:
+      print("You look outside and you see a blizzard, it seems that you need clothes to go outside")
+    if choice == 2:
+      location = "Locked Room"
+  input("Press ENTER to continue")
+  print()
+print("Game over")

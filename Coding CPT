@@ -1,0 +1,95 @@
+import random 
+points = 0
+pointget = 0
+doublerolls = 0
+equalrolls = 0
+location = "menu"
+turns = 1
+while True:
+  if location == "menu":
+    print("Choices: ")
+    print("[1] Regular Roll")
+    print("[2] Double Roll")
+    print("[3] Cashout")
+    choice = input("Enter Choice: ")
+    if choice == "1":
+      location = "regular roll"
+    elif choice == "2":
+      location = "double roll"
+    elif choice == "3":
+      location = "cash out"
+    else:
+      print("That is not a choice, please try again.")
+  if location == "regular roll":
+    print("[1] Roll the dice")
+    print("[2] Exit to menu")
+    choice = input("Enter choice: ")
+    if choice == "1":
+      roll = random.randrange(1,6)
+      print(roll)
+      if roll == 1:
+        pointget = 10
+      elif roll == 2:
+        pointget = 20
+      elif roll == 3:
+        pointget = 30
+      elif roll == 4:
+        pointget = 40
+      elif roll == 5:
+        pointget = 50
+      elif roll == 6:
+        pointget = 60
+      points += pointget
+      print(f"You rolled a {roll} and got {pointget} points, leaving you with a total of {points} points")
+      turns += 1
+    elif choice == "2":
+      location = "menu"
+    else:
+      print("That is not a choice, please try again.")
+  if location == "double roll":
+    print("[1] Roll two dice")
+    print("[2] Exit to menu")
+    choice = input("Enter choice: ")
+    if choice == "1":
+      double_roll1 = random.randrange(1,6)
+      double_roll2 = random.randrange(1,6)
+      print(double_roll1)
+      print(double_roll2)
+      if double_roll2 > double_roll1:
+        pointget = 50
+        points += pointget
+        doublerolls += 1
+        print(f"Your second roll was higher than the first meaning you get {pointget} points and your total is {points} points ")
+      elif double_roll2 == double_roll1:
+        pointget = 100
+        points += pointget
+        equalrolls += 1
+        print(f" Your second roll was equal to your first meaning you get {pointget} points and your total is {points} points")
+      elif double_roll2 < double_roll1:
+        pointget = 65
+        points -= pointget
+        print(f"Your second roll was lower than your first meaning you lose {pointget} points and your total is {points} points ")
+      turns += 1 
+    elif choice == "2":
+      location = "menu"
+    else:
+      print("That is not a choice, please try again.")
+  if location == "cash out":
+    print(f"You got a total of {points} points with {doublerolls} successful double rolls and {equalrolls} successful equal rolls")
+    average = points/turns
+    average = round(average)
+    print(f"You got a average of {average} points per turn")
+    print("Would you like to play again? Y/N")
+    choice = input("Enter choice: ")
+  if choice == "Y" or choice == "y":
+    location = "menu"
+    points = 0
+    pointget = 0
+    doublerolls = 0
+    equalrolls = 0
+    turns = 1
+  elif choice =="N" or choice == "n":
+    break
+  else:
+    print("That is not a choice, please try again.")
+    
